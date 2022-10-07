@@ -26,4 +26,27 @@ public class Segment {
     public void setPoint2(Point point2) {
         this.point2 = point2;
     }
+
+    //COEFFICIENTE ANGOLARE
+    public Integer getGradient(Segment segment1){
+        Integer gradient = (segment1.point2.y - segment1.point1.y) / (segment1.point2.x - segment1.point1.x);
+
+        return  gradient;
+    }
+
+    //PARALLELO only works if the length of the two lines are equal. But i wanted to keep simple
+    public boolean IsParallel(Segment segment1,Segment segment2){
+
+        if(segment1.point1.x - segment2.point1.x == segment1.point2.x - segment2.point2.x)
+        return true ;
+
+        else return false;
+
+    }
+    //PERPENDICOLARE
+    public boolean IsPerpendicular(Segment segment1, Segment segment2){
+
+        return false;
+    }
+
 }
