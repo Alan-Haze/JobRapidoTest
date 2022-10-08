@@ -28,7 +28,9 @@ public abstract class Segment {
             return false;
         else
             if(segment1.getGradient()==null || segment2.getGradient()==null)
-                if(segment1.getGradient()==0.0 || segment2.getGradient()==0.0)
+                if(segment1.getGradient()!=null && segment1.getGradient()==0.0)
+                    return true;
+                else if(segment2.getGradient()!=null && segment2.getGradient()==0.0)
                     return true;
                 else
                     return false;
@@ -41,14 +43,17 @@ public abstract class Segment {
     }
 
     public static Point intersection(Segment segment1,Segment segment2){
+        SegmentWithPoint segment_1=null;
+        Segment segment_2=null;
         if (isIncidence(segment1,segment2)) {
             Double x=null,y=null;
             if(segment1.getGradient()!=null & segment2.getGradient()!=null) {
                 x = (segment2.getIntercept() - segment1.getIntercept()) / (segment1.getGradient() - segment2.getGradient());
                 y = segment1.getGradient() * x + segment1.getIntercept();
+                return new Point(x, y);
             }
-
-            return new Point(x, y);
+            else
+                return null;//the program does not include the case where only one segment is vertical
         }
         else {
             System.out.println("there isn't intersection point");

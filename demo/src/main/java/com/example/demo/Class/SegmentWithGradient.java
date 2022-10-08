@@ -1,6 +1,7 @@
 package com.example.demo.Class;
 
 public class SegmentWithGradient extends Segment{
+    //In this class verticals segments aren't allowed !!
     Double gradient;
     Double intercept;
 

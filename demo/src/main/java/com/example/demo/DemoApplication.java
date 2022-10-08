@@ -26,10 +26,10 @@ public class DemoApplication {
 		Segment segment4vertical = new SegmentWithGradient(null,-3.0);
 		Segment segment1horizontal= new SegmentWithPoint(new Point(1.0, 0.0), new Point(10.0, 0.0));
 		Segment segment2horizontal= new SegmentWithGradient(0.0,9.0);
-		/*
+
 		//point-point
 		testParallel(segment1diagonal,segment2diagonal);
-		testParallel(segment1diagonal,segment2vertical);
+		testParallel(segment1vertical,segment2vertical);
 		testParallel(segment1diagonal,segment1vertical);
 		//gradient-gradient
 		testParallel(segment3diagonal,segment4diagonal);
@@ -38,7 +38,7 @@ public class DemoApplication {
 		//point-gradient
 		testParallel(segment1diagonal,segment4diagonal);
 		testParallel(segment1vertical,segment3vertical);
-		testParallel(segment1diagonal,segment3vertical);*/
+		testParallel(segment1diagonal,segment3vertical);
 
 		//point-point
 		testPerpendicolar(segment1diagonal,segment5diagonal);
@@ -53,24 +53,34 @@ public class DemoApplication {
 		testPerpendicolar(segment1vertical,segment1horizontal);
 		testPerpendicolar(segment1diagonal,segment2vertical);
 
+		//point-point
+		testIntersection(segment1diagonal,segment5diagonal);
+		//point-Gradient
+		testIntersection(segment1diagonal,segment6diagonal);
+		//gradient-gradient
+		testIntersection(segment6diagonal,segment2horizontal);
 
 	}
 	static void testParallel(Segment segment1,Segment segment2){
 
 		if(Segment.isParallel(segment1,segment2))
-			System.out.println("Sono paralleli\n");
+			System.out.println("Sono paralleli");
 		else
-			System.out.println("Sono incidenti\n");
+			System.out.println("Sono incidenti");
 	}
 
 	static void testPerpendicolar(Segment segment1,Segment segment2){
-		System.out.println("gradient1: "+segment1.getGradient());
-		System.out.println("gradient2: "+segment2.getGradient());
 
 		if(Segment.isPerpendicolar(segment1,segment2))
 			System.out.println("sono perpendicolari");
 		else
 			System.out.println("Non sono perpendicolari");
 
+	}
+
+	static void testIntersection(Segment segment1,Segment segment2){
+		Point point=Segment.intersection(segment1,segment2);
+		if(point!=null)
+			System.out.println("Punto di intersezione: ("+point.getX()+";"+point.getY()+")");
 	}
 }
