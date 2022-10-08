@@ -1,27 +1,27 @@
 package com.example.demo.Class;
 
 public class Point {
-    Integer x;
-    Integer y;
+    Double x;
+    Double y;
 
-    public Point(Integer x, Integer y) {
+    public Point(Double x, Double y) {
         this.x = x;
         this.y = y;
     }
 
-    public Integer getX() {
+    public Double getX() {
         return x;
     }
 
-    public void setX(Integer x) {
+    public void setX(Double x) {
         this.x = x;
     }
 
-    public Integer getY() {
+    public Double getY() {
         return y;
     }
 
-    public void setY(Integer y) {
+    public void setY(Double y) {
         this.y = y;
     }
 }

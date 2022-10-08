@@ -1,52 +1,48 @@
 package com.example.demo.Class;
 
-import java.awt.*;
+import javax.swing.*;
 
-public class Segment {
-    Point point1;
-    Point point2;
+public abstract class Segment {
 
-    public Segment(Point point1, Point point2) {
-        this.point1 = point1;
-        this.point2 = point2;
-    }
 
-    public Point getPoint1() {
-        return point1;
-    }
+    public abstract Double getGradient() ;
 
-    public void setPoint1(Point point1) {
-        this.point1 = point1;
-    }
+    public abstract Double getIntercept() ;
 
-    public Point getPoint2() {
-        return point2;
-    }
-
-    public void setPoint2(Point point2) {
-        this.point2 = point2;
-    }
-
-    //COEFFICIENTE ANGOLARE
-    public Integer getGradient(Segment segment1){
-        Integer gradient = (segment1.point2.y - segment1.point1.y) / (segment1.point2.x - segment1.point1.x);
-
-        return  gradient;
-    }
-
-    //PARALLELO only works if the length of the two lines are equal. But i wanted to keep simple
-    public boolean IsParallel(Segment segment1,Segment segment2){
-
-        if(segment1.point1.x - segment2.point1.x == segment1.point2.x - segment2.point2.x)
-        return true ;
-
-        else return false;
+    public static boolean isParallel(Segment segment1,Segment segment2){
+        if(segment1.getGradient()!=null)
+            return segment1.getGradient().equals( segment2.getGradient() );
+        else //segment1 is vertical
+            if(segment2.getGradient()==null)
+                return true;//the segments are vertical
+            else
+                return false;
 
     }
-    //PERPENDICOLARE
-    public boolean IsPerpendicular(Segment segment1, Segment segment2){
 
-        return false;
+    public static boolean isPerpendicolar(Segment segment1,Segment segment2){
+        if(segment1.getGradient()==null || segment2.getGradient()==null)
+            if(segment1.getGradient()==0 || segment2.getGradient()==0)
+                return true;
+            else
+                return false;
+        else
+            return (segment1.getGradient() * segment2.getGradient()==-1);
     }
 
+    public static boolean isIncidence(Segment segment1,Segment segment2){
+        return !(isParallel(segment1,segment2));
+    }
+
+    public static Point intersection(Segment segment1,Segment segment2){
+        if (isIncidence(segment1,segment2)) {
+            Double x = (segment2.getIntercept()- segment1.getIntercept()) / (segment1.getGradient()- segment2.getGradient());
+            Double y = segment1.getGradient()*x + segment1.getIntercept();
+            return new Point(x,y);
+        }
+        else {
+            System.out.println("there isn't intersection point");
+            return null;//there isn't intersection point
+        }
+    }
 }
