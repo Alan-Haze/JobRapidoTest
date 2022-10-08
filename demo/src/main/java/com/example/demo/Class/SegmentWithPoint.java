@@ -4,6 +4,11 @@ public class SegmentWithPoint extends Segment {
     public Point point1;
     public Point point2;
 
+    public SegmentWithPoint(Point point1, Point point2) {
+        this.point1 = point1;
+        this.point2 = point2;
+    }
+
     public Point getPoint1() {
         return point1;
     }
@@ -22,23 +27,21 @@ public class SegmentWithPoint extends Segment {
 
     @Override
     public Double getGradient() {
-        if (point1.getX()!=point2.getX())
+        if (point1.getX().equals(point2.getX()))
+            return null;//The segment is vertical
+        else
             return (point1.getY() - point2.getY()) / (point1.getX() - point2.getX());
-        else{//The segment is vertical
-            System.out.println("The gradient is infinite");
-            return null;
-        }
     }
 
 
 
     @Override
     public Double getIntercept() {
-        if (point1.getX()!=point2.getX())
-            return -getGradient()*point1.getX() + point1.getY();
-        else{//The segment is vertical
+        if (point1.getX().equals(point2.getX())){//The segment is vertical
             System.out.println("There isn't intercept");
             return null;
         }
+        else
+            return -getGradient()*point1.getX() + point1.getY();
     }
 }

@@ -4,6 +4,11 @@ public class SegmentWithGradient extends Segment{
     Double gradient;
     Double intercept;
 
+    public SegmentWithGradient(Double gradient, Double intercept) {
+        this.gradient = gradient;
+        this.intercept = intercept;
+    }
+
     @Override
     public Double getGradient() {
         return gradient;
